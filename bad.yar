@@ -19,3 +19,4 @@ rule test
     condition:
         all of them
 }
+
