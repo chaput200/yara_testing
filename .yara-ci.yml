@@ -3,9 +3,7 @@ branches:
   - "main"
 files:
   accept:
-  - "C:\\Users\\clc\\yara_testing\\bad.yar"
-  - "C:\\Users\\clc\\yara_testing\\test.yar"
-  - "C:\\Users\\clc\\yara_testing\\bad.yara"
-  - "C:\\Users\\clc\\yara_testing\\test.yara"
+  - "**.yar"
+  - "**.yara"
 
 
