@@ -37,5 +37,3 @@ rule Compromised_DLL_3CX
     condition:
         filesize < 500KB and ( all of ($s*) or ( 3 of ( $s* ) and $lcg_chunk_1 ) or $url )
 }
-
-// THIS IS A SINGLE COMMENT
