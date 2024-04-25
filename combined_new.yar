@@ -1,5 +1,5 @@
 import "pe"
-import "vt"
+//import "vt"
 
 rule APT_CN_FISHMASTER_STRING_PDB_MALWARE {
 	meta:
@@ -28,10 +28,12 @@ rule APT_CN_FISHMASTER_STRING_PDB_MALWARE {
         $pdb2 = "\\fishmaster\\"
         $pdb3 = "\\fishmaster.pdb"
     condition:
+		//uint16(0) == 0x5a4d and
+        //($str1 or (any of ($pdb*)) or 
+        //for any engine, signature in vt.metadata.signatures : (signature contains "BidenHappy")
+        //) or pe.pdb_path == "C:\\Users\\test\\Desktop\\fishmaster\\x64\\Release\\fishmaster.pdb"
 		uint16(0) == 0x5a4d and
-        ($str1 or (any of ($pdb*)) or 
-        for any engine, signature in vt.metadata.signatures : (signature contains "BidenHappy")
-        ) or pe.pdb_path == "C:\\Users\\test\\Desktop\\fishmaster\\x64\\Release\\fishmaster.pdb"
+        ($str1 or (any of ($pdb*))) or pe.pdb_path == "C:\\Users\\test\\Desktop\\fishmaster\\x64\\Release\\fishmaster.pdb"
 }
 
 //11f21d08f819dea21a09c602a4391142a5648f3e17a07a24d41418fcc17ea83f	TELF = T110044B03FB8594FBC0C9D5B2C6CFC0AADA6270546325152B3DCEA3151919B318F6EBA7
