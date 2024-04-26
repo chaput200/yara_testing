@@ -1,5 +1,5 @@
 import "pe"
-//import "vt"
+import "vt"
 
 rule APT_CN_FISHMASTER_STRING_PDB_MALWARE {
 	meta:
@@ -28,12 +28,10 @@ rule APT_CN_FISHMASTER_STRING_PDB_MALWARE {
         $pdb2 = "\\fishmaster\\"
         $pdb3 = "\\fishmaster.pdb"
     condition:
-		//uint16(0) == 0x5a4d and
-        //($str1 or (any of ($pdb*)) or 
-        //for any engine, signature in vt.metadata.signatures : (signature contains "BidenHappy")
-        //) or pe.pdb_path == "C:\\Users\\test\\Desktop\\fishmaster\\x64\\Release\\fishmaster.pdb"
 		uint16(0) == 0x5a4d and
-        ($str1 or (any of ($pdb*))) or pe.pdb_path == "C:\\Users\\test\\Desktop\\fishmaster\\x64\\Release\\fishmaster.pdb"
+        ($str1 or (any of ($pdb*)) or 
+        for any engine, signature in vt.metadata.signatures : (signature contains "BidenHappy")
+        ) or pe.pdb_path == "C:\\Users\\test\\Desktop\\fishmaster\\x64\\Release\\fishmaster.pdb"
 }
 
 //11f21d08f819dea21a09c602a4391142a5648f3e17a07a24d41418fcc17ea83f	TELF = T110044B03FB8594FBC0C9D5B2C6CFC0AADA6270546325152B3DCEA3151919B318F6EBA7
@@ -490,35 +488,6 @@ rule INFO_ANDROID_DEX_FILE {
 
 
 import "pe"
-rule INFO_API_OVERRIDE_TOOL_SECTION_NAME {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of renamed section name added by API Override tool"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == ".winapi" 
-            )
-        )
-}
-
-
-import "pe"
 rule INFO_ASPACK_PACKER {
 	meta:
 		version = "1"
@@ -551,64 +520,6 @@ rule INFO_ASPACK_PACKER {
 
 
 import "pe"
-rule INFO_BOOMERANG_PACKER {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of Boomerang List Builder renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == ".boom"
-            )
-        )
-}
-
-
-import "pe"
-rule INFO_CCG_PACKER {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of CCG Packer (Chinese Packer) renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == ".ccg"
-            )
-        )
-}
-
-
-import "pe"
 rule INFO_CRUNCH_PACKER {
 	meta:
 		version = "1"
@@ -632,63 +543,6 @@ rule INFO_CRUNCH_PACKER {
   	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
             (
                 pe.sections[i].name == "BitArts"
-            )
-        )
-}
-
-
-rule INFO_CVE_MENTION
-{
-	meta:
-		version = "1"
-		date = "1/31/24"
-		modified = "1/31/24"
-		status = "DEVELOPMENT"
-		sharing = "TLP:CLEAR"
-		source = "N/A"
-		author = "@x0rc1sm"
-		description = "Attempting to find mentions of CVE-####-#### in files"
-		category = "info"
-		malware_type = "N/A"
-		malware_family = "N/A"
-		mitre_att = "N/A"
-		actor_type = "APT"
-		actor = "N/A"
-		report = "N/A"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$CVE = /CVE[-_]\d{4}[-_]\d{4}/ ascii wide
-	condition:
-		$CVE
-}
-
-
-import "pe"
-rule INFO_DAStub_Dragon_Armor_protector {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of DAStub Dragon Armor protector renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == "DAStub"
             )
         )
 }
@@ -809,36 +663,6 @@ rule INFO_EPL_BUILD {
 
 
 import "pe"
-rule INFO_FIRSERIA_PUP_DOWNLOADER_SECTION_NAME {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of Firseria PUP downloaders renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == ".mnbvcx1" or
-                pe.sections[i].name == ".mnbvcx2"
-            )
-        )
-}
-
-
-import "pe"
 rule INFO_GENTEE_INSTALLER {
 	meta:
 		version = "1"
@@ -864,35 +688,6 @@ rule INFO_GENTEE_INSTALLER {
                 pe.sections[i].name == ".gentee" 
             )
         )
-}
-
-
-rule INFO_HTTP_HTTPS_XOR
-{
-	meta:
-		version = "1"
-		date = "2/1/24"
-		modified = "2/1/24"
-		status = "DEVELOPMENT"
-		sharing = "TLP:CLEAR"
-		source = "N/A"
-		author = "@x0rc1sm"
-		description = "Attempting to find http or https obfuscated with single byte XOR"
-		category = "info"
-		malware_type = "N/A"
-		malware_family = "N/A"
-		mitre_att = "N/A"
-		actor_type = "APT"
-		actor = "N/A"
-		report = "N/A"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$STR1 = "https://" xor (0x01-0xff)
-		$STR2 = "http://" xor (0x01-0xff)
-	condition:
-		any of them
 }
 
 
@@ -947,42 +742,6 @@ rule INFO_ImpRec_Section_name {
                 pe.sections[i].name == ".mackt" 
             )
         )
-}
-
-
-rule INFO_KCP_MZ_FILE {
-	meta:
-		version = "1"
-		date = "1/17/24"
-		modified = "1/17/24"
-		status = "DEVELOPMENT"
-		sharing = "TLP:CLEAR"
-		source = "https://github.com/skywind3000/kcp/blob/master/ikcp.c"
-		author = "@x0rc1sm"
-		description = "taking print and log reference from KCP, trying to find other implementations"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "N/A"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$kcp1 = "[RO] %ld bytes" //ikcp_log(kcp, IKCP_LOG_OUTPUT, "[RO] %ld bytes", (long)size)
-		$kcp2 = "[RI] %d bytes" //ikcp_log(kcp, IKCP_LOG_INPUT, "[RI] %d bytes", (int)size);
-		$kcp3 = "recv sn=%lu" //ikcp_log(kcp, IKCP_LOG_RECV, "recv sn=%lu", (unsigned long)seg->sn);
-		$kcp4 = "input ack: sn=%lu rtt=%ld rto=%ld" //ikcp_log(kcp, IKCP_LOG_IN_ACK, "input ack: sn=%lu rtt=%ld rto=%ld", (unsigned
-		$kcp5 = "input psh: sn=%lu ts=%lu" //ikcp_log(kcp, IKCP_LOG_IN_DATA, "input psh: sn=%lu ts=%lu", (unsigned long)sn,
-		$kcp6 = "input probe" //ikcp_log(kcp, IKCP_LOG_IN_PROBE, "input probe");
-		$kcp7 = "input wins: %lu" //ikcp_log(kcp, IKCP_LOG_IN_WINS, "input wins: %lu", (unsigned long)(wnd));
-		$kcp8 = "snd(buf=%d, queue=%d)\\n" // printf("snd(buf=%d, queue=%d)\n", kcp->nsnd_buf, kcp->nsnd_que);
-		$kcp9 = "rcv(buf=%d, queue=%d)\\n" // printf("rcv(buf=%d, queue=%d)\n", kcp->nrcv_buf, kcp->nrcv_que);
-		$kcp10 = "rcv_nxt=%lu\\n" // printf("rcv_nxt=%lu\n"
-		$kcp11 = "rcvbuf" //ikcp_qprint("rcvbuf"
-	condition:
-		uint16(0) == 0x5a4d and 5 of them
 }
 
 
@@ -1069,120 +828,6 @@ rule INFO_LNK_FILE_CMD_LINE {
 }
 
 
-import "magic"
-rule INFO_LNK_FILE_POWERSHELL {
-	meta:
-		version = "1"
-		date = "1/9/24"
-		modified = "1//24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = ""
-		author = "@x0rc1sm"
-		description = "Detection of LNK File Headers/Magic header and containing powershell"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://stairwell.com/resources/the-ink-stained-trail-of-goldbackdoor/"
-		hash = "99fb399c9b121ef6e60e9bdff8b324b2"
-		hash = "ea0609fbf3bf0cfb2acea989126d8caafe5350ec"
-		hash = "120ca851663ef0ebef585d716c9e2ba67bd4870865160fec3b853156be1159c5"
-	strings:
-		$s1 = "powershell" ascii wide nocase
-		$s2 = "powershell -windowstyle hidden" ascii wide nocase
-		$s3 = "powershell.exe" ascii wide nocase
-  condition:
-    (magic.type() contains "MS Windows shortcut" or uint16(0)==0x004c) and any of them
-}
-
-
-rule INFO_LOLBIN_RUNDLL_USAGE {
-	meta:
-		version = "1"
-		date = "1/16/24"
-		modified = "1/16/24"
-		status = "DEVELOPMENT"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Attempting to find rundll32 LOLBIN usage"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://redcanary.com/blog/lolbins-abuse/"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$rundll32 = "C:\\WINDOWS\\system32\\rundll32.exe" nocase wide
-		$rundll64 = "C:\\Windows\\SysWOW64\\Rundll32.exe" nocase wide
-	condition:
-		any of them
-}
-
-
-import "pe"
-rule INFO_MASKPE_PACKER {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of MaskPE Packer renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == ".MaskPE" 
-            )
-        )
-}
-
-
-import "pe"
-rule INFO_MEW_PACKER {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of MEW packer renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == "MEW" 
-            )
-        )
-}
-
-
 import "pe"
 rule INFO_MPRESS_PACKER {
 	meta:
@@ -1239,131 +884,6 @@ rule INFO_MZ_FILE {
 		hash = "aebff5134e07a1586b911271a49702c8623b8ac8da2c135d4d3b0145a826f507"
   condition:
     (magic.type() contains "PE32 executable" or magic.type() contains "PE32+ executable" or uint16(0) == 0x5a4d)
-}
-
-
-import "magic"
-rule INFO_MZ_FILE_COMPUTERNAME_FUNCTION{
-	meta:
-		version = "1"
-		date = "2/4/24"
-		modified = "2/4/24"
-		status = "DEVELOPMENT"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Check if the computername with function"
-		category = "info"
-		malware_type = "N/A"
-		malware_family = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://evasions.checkpoint.com/techniques/generic-os-queries.html"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$STR1 = "GetComputerNameA" ascii wide 
-		$STR2 = "GetComputerNameW" ascii wide  
-		$STR3 = "GetComputerNameExA" ascii wide 
-		$STR4 = "GetComputerNameExA" ascii wide 
-	condition:
-		(magic.type() contains "PE32 executable" or magic.type() contains "PE32+ executable" or uint16(0) == 0x5a4d) and any of them
-}
-
-
-import "magic"
-rule INFO_MZ_FILE_DISPLAY_FUNCTION{
-	meta:
-		version = "1"
-		date = "2/6/24"
-		modified = "2/6/24"
-		status = "DEVELOPMENT"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Checks if there are monitors or resolution limitations with function"
-		category = "info"
-		malware_type = "N/A"
-		malware_family = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://evasions.checkpoint.com/techniques/generic-os-queries.html"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$STR1 = "GetDesktopWindow" ascii wide 
-		$STR2 = "GetWindowRect" ascii wide  
-		$STR3 = "GetMonitorInfo" ascii wide 
-		$STR4 = "EnumDisplayMonitors" ascii wide 
-	condition:
-		(magic.type() contains "PE32 executable" or magic.type() contains "PE32+ executable" or uint16(0) == 0x5a4d) and any of them
-}
-
-    
-    
-
-
-import "magic"
-rule INFO_MZ_FILE_HARDWARE_FUNCTION{
-	meta:
-		version = "1"
-		date = "2/5/24"
-		modified = "2/5/24"
-		status = "DEVELOPMENT"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Checks if there are hardware limitations with function"
-		category = "info"
-		malware_type = "N/A"
-		malware_family = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://evasions.checkpoint.com/techniques/generic-os-queries.html"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$STR1 = "GetMemoryStatusEx" ascii wide 
-		$STR2 = "GetSystemInfo" ascii wide  
-		$STR3 = "GetDiskFreeSpaceExA" ascii wide 
-		$STR4 = "GetDiskFreeSpaceExW" ascii wide 
-	condition:
-		(magic.type() contains "PE32 executable" or magic.type() contains "PE32+ executable" or uint16(0) == 0x5a4d) and any of them
-}
-
-
-import "magic"
-rule INFO_MZ_FILE_USERNAME_FUNCTION{
-	meta:
-		version = "1"
-		date = "2/3/24"
-		modified = "2/3/24"
-		status = "DEVELOPMENT"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Check if the username is specific with function"
-		category = "info"
-		malware_type = "N/A"
-		malware_family = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://evasions.checkpoint.com/techniques/generic-os-queries.html"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$STR1 = "GetUserNameA" ascii wide 
-		$STR2 = "GetUserNameW" ascii wide  
-	condition:
-		(magic.type() contains "PE32 executable" or magic.type() contains "PE32+ executable" or uint16(0) == 0x5a4d) and any of them
 }
 
 
@@ -1430,35 +950,6 @@ rule INFO_NESTED_ZIP {
 
 
 import "pe"
-rule INFO_NIGHTHAWK_C2_FRAMEWORK_SECTION_NAME {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of NightHawk C2 framework (by MDSec) renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == ".profile" 
-            )
-        )
-}
-
-
-import "pe"
 rule INFO_NSPACK_PACKER {
 	meta:
 		version = "1"
@@ -1514,35 +1005,6 @@ rule INFO_PDF_FILE {
 		hash = "19ac1c943d8d9e7b71404b29ac15f37cd230a463003445b47441dc443d616afd"
   condition:
     (magic.type() contains "PDF document" or uint32be(0) == 0x25504446)
-}
-
-
-import "magic"
-rule INFO_PDF_FILE_GOOGLE_DOC
-{
-	meta:
-		version = "1"
-		date = "1/28/24"
-		modified = "1/28/24"
-		status = "DEVELOPMENT"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = ""
-		category = "info"
-		malware_type = "N/A"
-		malware_family = "N/A"
-		mitre_att = "N/A"
-		actor_type = "APT"
-		actor = "N/A"
-		report = "N/A"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$STR1 = /Skia\/PDF m[0-9]{1,3} Google Docs Renderer/
-	condition:
-		(magic.type() contains "PDF document" or uint32be(0) == 0x25504446) and $STR1
 }
 
 
@@ -1673,35 +1135,6 @@ rule INFO_PERPLEX_PROTECTOR {
 
 
 import "pe"
-rule INFO_PESHIELD_PACKER {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of PEShield Packer renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == "PESHiELD" 
-            )
-        )
-}
-
-
-import "pe"
 rule INFO_PESPIN_SECTION_NAME {
 	meta:
 		version = "1"
@@ -1788,64 +1221,6 @@ rule INFO_PHP_BASE64_EVAL{
 
 
 import "pe"
-rule INFO_PIN_TOOL_ARTIFACT {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of PIN Tool renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == ".pinclie" 
-            )
-        )
-}
-
-
-import "pe"
-rule INFO_PROCRYPT_PACKER {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of ProCrypt Packer renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == "ProCrypt" 
-            )
-        )
-}
-
-
-import "pe"
 rule INFO_RAMNIT_VIRUS_MARKER_SECTION_NAME {
 	meta:
 		version = "1"
@@ -1904,36 +1279,6 @@ rule INFO_RLPACK_PACKER {
 }
 
 
-import "pe"
-rule INFO_RPCRYPT_PACKER {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of RPCrypt Packer renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == "RCryptor" or
-                pe.sections[i].name == ".RPCryptor"
-            )
-        )
-}
-
-
 import "magic"
 rule INFO_RTF_FILE{
 	meta:
@@ -1956,35 +1301,6 @@ rule INFO_RTF_FILE{
 		hash = "2a533047b555a33bcc5d4ad9fb6f222b601f9d643be908c940c38284aa4354b6"
   condition:
 		(magic.type() contains "Rich Text Format" or uint32be(0) == 0x7B5C7274)
-}
-
-
-import "pe"
-rule INFO_SEAUSFX_PACKER {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of SeauSFX Packer renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == ".seau" 
-            )
-        )
 }
 
 
@@ -2020,35 +1336,6 @@ rule INFO_SHRINKER_SECTION_NAME {
 
 
 import "pe"
-rule INFO_SIMPLE_PACK_SECTION_NAME {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of Simple Pack (by bagie) renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == ".spack" 
-            )
-        )
-}
-
-
-import "pe"
 rule INFO_STARFORCE_PROTECTION_PACKER {
 	meta:
 		version = "1"
@@ -2072,35 +1359,6 @@ rule INFO_STARFORCE_PROTECTION_PACKER {
   	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
             (
                 pe.sections[i].name == ".sforce3" 
-            )
-        )
-}
-
-
-import "pe"
-rule INFO_SVKP_PACKER {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of SVKP packer renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == ".svkp" 
             )
         )
 }
@@ -2322,35 +1580,6 @@ rule INFO_VPROTECT_PACKER {
 
 
 import "pe"
-rule INFO_WinLicense_Protector {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of WinLicense (Themida) Protector renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == "WinLicen" 
-            )
-        )
-}
-
-
-import "pe"
 rule INFO_WINZIP_SELF_EXTRACTOR_SECTION_NAME {
 	meta:
 		version = "1"
@@ -2374,36 +1603,6 @@ rule INFO_WINZIP_SELF_EXTRACTOR_SECTION_NAME {
   	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
             (
                 pe.sections[i].name == "_winzip_" 
-            )
-        )
-}
-
-
-import "pe"
-rule INFO_WWPACK_PACKER {
-	meta:
-		version = "1"
-		date = "1/6/24"
-		modified = "1/6/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Detection of WWPACK and WWPACK32 Packer renamed section names"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "https://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/"
-		hash = ""
-		hash = ""
-		hash = ""
-  condition:
-  	uint16(0) == 0x5a4d and for any i in (0 .. pe.number_of_sections) : (
-            (
-                pe.sections[i].name == "WWPACK" or 
-                pe.sections[i].name == ".WWP32"
             )
         )
 }
@@ -2462,89 +1661,6 @@ rule INFO_Y0DA_PROTECTOR {
                 pe.sections[i].name == ".y0da"
             )
         )
-}
-
-
-rule INFO_YARA_RULE_FILE {
-	meta:
-		version = "1"
-		date = "1/14/24"
-		modified = "1/14/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Matching YARA rule format File"
-		category = "info"
-		malware_type = "N/A"
-		mitre_att = "N/A"
-		actor_type = "N/A"
-		actor = "N/A"
-		report = "N/A"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$rulename = {72 75 6c 65 [0-50] 7b}
-		$condition = "condition:" fullword
-	condition:
-		filesize < 50KB and all of them
-}
-
-
-private rule doc_author
-{
-	meta:
-		version = "1"
-		date = "1/30/24"
-		modified = "1/30/24"
-		status = "DEVELOPMENT"
-		sharing = "TLP:CLEAR"
-		source = "N/A"
-		author = "@x0rc1sm"
-		description = "Attempting to write rule that will parse the document author in document files"
-		category = "info"
-		malware_type = "N/A"
-		malware_family = "N/A"
-		mitre_att = "N/A"
-		actor_type = "APT"
-		actor = "N/A"
-		report = "N/A"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$author = /\<dc\:creator\>.{1,60}\<\/dc\:creator\>/
-	condition:
-		$author
-}
-
-
-private rule last_modifed
-{
-	meta:
-		version = "1"
-		date = "1/29/24"
-		modified = "1/29/24"
-		status = "DEVELOPMENT"
-		sharing = "TLP:CLEAR"
-		source = "N/A"
-		author = "@x0rc1sm"
-		description = "Attempting to write rule that will parse the last modified field in document files"
-		category = "info"
-		malware_type = "N/A"
-		malware_family = "N/A"
-		mitre_att = "N/A"
-		actor_type = "APT"
-		actor = "N/A"
-		report = "N/A"
-		hash = ""
-		hash = ""
-		hash = ""
-	strings:
-		$modified = /\<dc\:lastModifiedBy\>.{1,60}\<\/dc\lastModifiedBy\>/
-	condition:
-		$modified
 }
 
 
