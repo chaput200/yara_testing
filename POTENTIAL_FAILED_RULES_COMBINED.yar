@@ -1,6 +1,5 @@
 import "pe"
 
-
 rule APT_CN_FISHMASTER_STRING_PDB_MALWARE {
 	meta:
 		version = "1"
