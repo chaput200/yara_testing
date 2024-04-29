@@ -27,8 +27,7 @@ rule APT_CN_FISHMASTER_STRING_PDB_MALWARE {
         $pdb3 = "\\fishmaster.pdb"
     condition:
 		uint16(0) == 0x5a4d and
-        ($str1 or (any of ($pdb*)) or 
-        for any engine, signature in vt.metadata.signatures : (signature contains "BidenHappy")
+        ($str1 or (any of ($pdb*))
         ) or pe.pdb_path == "C:\\Users\\test\\Desktop\\fishmaster\\x64\\Release\\fishmaster.pdb"
 }
 
