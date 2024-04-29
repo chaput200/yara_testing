@@ -269,31 +269,6 @@ rule APT_NK_KIMSUKY_APPLESEED_IMPHASH_MALWARE {
 }
 
 
-import "pe"
-rule APT_KIMSUKY_APPLESEED_MALWARE {
-	meta:
-		version = "1"
-		date = "1/25/24"
-		modified = "1/25/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "import hash of DLRAT"
-		category = "malware"
-		malware_type = "BACKDOOR"
-		malware_family = "DLRAT"
-		mitre_att = "TA0002, TA0003, TA0004, TA0005, TA0007, TA0011, TA0034, TA0040"
-		actor_type = "APT"
-		actor = "Lazarus"
-		report = "https://blog.talosintelligence.com/lazarus_new_rats_dlang_and_telegram/"
-		hash = "d62126246776ddf0ad64df8c78552805"
-		hash = "9285f2d790c65c94e382463bfff17a642b2b9762"
-		hash = "9a48357c06758217b3a99cdf4ab83263c04bdea98c347dd14b254cab6c81b13a"
-	condition:
-		uint16(0) == 0x5a4d and pe.imphash() == "c4a0213bb099203c783857a5e2fe3edc"
-}
-
 
 import "pe"
 import "hash"
@@ -380,41 +355,6 @@ rule CRIME_ASYNCRAT_DOTNET_METADATA_MALWARE {
 }
 
 
-rule MALWARE_SPARKRAT_GOLANG {
-	meta:
-		version = "1"
-		date = "1/10/24"
-		modified = "1/10/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "SparkRat Golang Function Names and regex for build ID"
-		category = "malware"
-		malware_type = "BACKDOOR"
-		malware_family = "SPARKRAT"
-		mitre_att = "TA0007, TA0011"
-		actor_type = "APT, CRIMEWARE"
-		actor = "N/A"
-		report = "https://github.com/XZB-1248/Spark, https://asec.ahnlab.com/en/52899/, https://www.sentinelone.com/labs/dragonspark-attacks-evade-detection-with-sparkrat-and-golang-source-code-interpretation/"
-		hash = "86048394d153f9d0c3f06aae980735ac05bc0cca99977f98e623a31a68318116"
-		hash = "78df6bd0995bb4fc53f96fbed5c4e370b9669c214d5ece45b3a157e108ca5d35"
-		hash = "5431094ccb79a89214ad1b63ae4acb711edacadce267650fbd922f452e688081"
-	strings:
-		$str1 = "Spark/client/core"
-		$str2 = "Spark/client/common"
-		$str3 = "Spark/client/config"
-		$str4 = "Spark/client/service/file"
-		$str5 = "Spark/client/service/desktop"
-		$str6 = "Spark/client/service/process"
-		$str7 = "Spark/client/service/terminal"
-		$buildid = "go.buildid"
-		$regexGoBuildId = /Go build ID: \"[a-zA-Z0-9\/_-]{40,120}\"/ ascii wide
-    condition:
-    	 (uint16(0) == 0x5a4d or uint32(0) == 0x464c457f) and ((#regexGoBuildId == 1 or #buildid == 1) and any of ($str*))
-}
-
-
 rule CRIME_ORVX_WEBSHELL_MALWARE {
 	meta:
 		version = "1"
@@ -442,63 +382,6 @@ rule CRIME_ORVX_WEBSHELL_MALWARE {
 		filesize < 1MB and all of them
 }
 
-
-import "dotnet"
-rule CRIME_SERPENT_INFOSTEALER_DOTNET_METADATA_MALWARE {
-	meta:
-		version = "1"
-		date = "1/18/24"
-		modified = "1/18/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = ""
-		category = "malware"
-		malware_type = "INFOSTEALER"
-		malware_family = "SERPENT"
-		mitre_att = "TA0002, TA0005, TA0006, TA0007, TA0009, TA0011"
-		actor_type = "CRIME"
-		actor = "UNK"
-		report = "https://labs.k7computing.com/index.php/uncovering-the-serpent/"
-		hash = "e97868c8431ccd922dea3dfb50f7e0b5"
-		hash = "7ec3f0f2aa8dee96f0df30c9e8e529a3578ff8d8"
-		hash = "cd118e082d2c035da179358c8a3c54b879b6e1b71eec2a965b78aa929b83eb11"
-    strings:
-        $pdb1 = "/home/pluto/Downloads/SerpentStealer/Serpent/obj/Release/net7.0/win-x64/Serpent.pdb"
-    condition:
-    	uint16(0) == 0x5a4d and (dotnet.guids[0]== "7e8abd91-7b70-4ee7-8184-ea4b00adafdc" or dotnet.assembly.name == "Serpent" or $pdb1) 
-}
-
-
-import "pe"
-rule CRIME_VALLEYFALL_PDB_PATH_IMPHASH_MALWARE{
-	meta:
-		version = "1"
-		date = "1/24/24"
-		modified = "1/24/24"
-		status = "RELEASED"
-		sharing = "TLP:CLEAR"
-		source = "n/a"
-		author = "@x0rc1sm"
-		description = "Unique PDB Path or import hash for malware family "
-		category = "malware"
-		malware_type = "BACKDOOR"
-		malware_family = "VALLEYFALL"
-		mitre_att = "TA0002, TA0003, TA0004, TA0005, TA0006, TA0007, TA0009"
-		actor_type = "CRIME"
-		actor = "UNK"
-		report = "https://www.avira.com/en/blog/valleyfall-spyware-in-the-wild-from-one-sample-to-a-hive-of-malware-servers"
-		hash = "39970f254b9b88a8879ce5322c6112a9"
-		hash = "d34dfaebb5e03dac50b2feef8a4704b2073e52c1"
-		hash = "d9d6bde1ade8ae154331b7f7e50564ad17bf9368728959a0a74764ae60bec618"
-	strings:
-		$PDB1 = {43 3A 5C 55 73 65 72 73 5C E8 B0 B7 E5 A0 95 5C 44 65 73 6B 74 6F 70 5C 32 30 32 32 E8 BF 9C E7 A8 8B E7 AE A1 E7 90 86 67 66 69 5C 63 61 6E 67 6B 75 5C 57 69 6E 4F 73 43 6C 69 65 6E 74 50 72 6F 6A 65 63 74 5C 52 65 6C 65 61 73 65 2D 65 78 65 5C E4 B8 8A E7 BA BF E6 A8 A1 E5 9D 97 2E 70 64 62} //C:\Users\谷堕\Desktop\2022远程管理gfi\cangku\WinOsClientProject\Release-exe\上线模块.pdb 
-		$PDB2 = {43 3A 5C 55 73 65 72 73 5C E8 B0 B7 E5 A0 95 5C 44 65 73 6B 74 6F 70 5C 32 30 32 32 E8 BF 9C E7 A8 8B E7 AE A1 E7 90 86 67 66 69 5C 63 61 6E 67 6B 75 5C 57 69 6E 4F 73 43 6C 69 65 6E 74 50 72 6F 6A 65 63 74} //C:\Users\谷堕\Desktop\2022远程管理gfi\cangku\WinOsClientProject\
-		$PDB3 = {5C E4 B8 8A E7 BA BF E6 A8 A1 E5 9D 97 2E 70 64 62} //上线模块.pdb
-	condition:
-		uint16(0) == 0x5a4d and (any of ($PDB*) or pe.imphash() == "9d7ac77a44667ba5186f7bb12dfd9d42")
-}
 
 
 import "pe"
