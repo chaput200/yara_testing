@@ -1,4 +1,5 @@
 import "pe"
+
 //import "vt"
 
 rule APT_CN_FISHMASTER_STRING_PDB_MALWARE {
