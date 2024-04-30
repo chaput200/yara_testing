@@ -181,7 +181,7 @@ rule sign_179 { strings: $hex = { 42 5A 68 } condition: $hex } // Mac Disk image
 rule sign_180 { strings: $hex = { 42 65 67 69 6E 20 50 75 66 66 65 72 } condition: $hex } // Puffer ASCII encrypted archive: APUF
 rule sign_181 { strings: $hex = { 42 6C 69 6E 6B } condition: $hex } // Blink compressed archive: BLI
 rule sign_182 { strings: $hex = { 43 23 2B 44 A4 43 4D A5 } condition: $hex } // RagTime document: RTD
-rule sign_183 { condition: uint32be(0,(null)) == 0x43415420 } // EA Interchange Format File (IFF)_3: IFF
+rule sign_183 { condition: uint32be(0) == 0x43415420 } // EA Interchange Format File (IFF)_3: IFF
 rule sign_184 { strings: $hex = { 43 42 46 49 4C 45 } condition: $hex } // WordPerfect dictionary: CBD
 rule sign_185 { strings: $hex = { 43 44 30 30 31 } condition: $hex } // ISO-9660 CD Disc Image: ISO
 rule sign_186 { strings: $hex = { 43 44 44 41 66 6D 74 20 } condition: $hex } // RIFF CD audio: CDA
