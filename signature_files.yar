@@ -181,7 +181,9 @@ rule sign_179 { strings: $hex = { 42 5A 68 } condition: $hex } // Mac Disk image
 rule sign_180 { strings: $hex = { 42 65 67 69 6E 20 50 75 66 66 65 72 } condition: $hex } // Puffer ASCII encrypted archive: APUF
 rule sign_181 { strings: $hex = { 42 6C 69 6E 6B } condition: $hex } // Blink compressed archive: BLI
 rule sign_182 { strings: $hex = { 43 23 2B 44 A4 43 4D A5 } condition: $hex } // RagTime document: RTD
+rule sign_183 { condition: uint32be(null) == 0x43415420 } // EA Interchange Format File (IFF)_3: IFF
 rule sign_183 { condition: uint32be(0) == 0x43415420 } // EA Interchange Format File (IFF)_3: IFF
+//rule sign_183 { condition: uint32be(0(null)) == 0x43415420 } // EA Interchange Format File (IFF)_3: IFF
 rule sign_184 { strings: $hex = { 43 42 46 49 4C 45 } condition: $hex } // WordPerfect dictionary: CBD
 rule sign_185 { strings: $hex = { 43 44 30 30 31 } condition: $hex } // ISO-9660 CD Disc Image: ISO
 rule sign_186 { strings: $hex = { 43 44 44 41 66 6D 74 20 } condition: $hex } // RIFF CD audio: CDA
@@ -280,7 +282,7 @@ rule sign_278 { condition: uint32be(0) == 0x4D534346 } // OneNote Package: ONEPK
 rule sign_279 { condition: uint32be(0) == 0x4D534346 } // Powerpoint Packaged Presentation: PPZ
 rule sign_280 { condition: uint32be(0) == 0x4D534346 } // MS Access Snapshot Viewer file: SNP
 rule sign_281 { strings: $hex = { 4D 53 46 54 02 00 01 00 } condition: $hex } // OLE-SPSS-Visual C++ library file: TLB
-rule sign_282 { strings: $hex = { D 53 48 7C 5E 7E 5C 26 7C } condition: $hex } // Health Level-7 data (pipe delimited) file: HL7
+//rule sign_282 { strings: $hex = { D 53 48 7C 5E 7E 5C 26 7C } condition: $hex } // Health Level-7 data (pipe delimited) file: HL7
 rule sign_283 { strings: $hex = { 4D 53 57 49 4D } condition: $hex } // Microsoft Windows Imaging Format: WIM
 rule sign_284 { strings: $hex = { 4D 53 5F 56 4F 49 43 45 } condition: $hex } // Sony Compressed Voice File: CDR,DVF,MSV
 rule sign_285 { condition: uint32be(0) == 0x4D546864 } // MIDI sound file: MID,MIDI
