@@ -7,7 +7,7 @@ As part of the 100 Days of YARA 2024 challenge, John Hammond shared the idea to 
 I thought it was brilliant.
 I based the rule syntax on stvemillertime ct_headers file.
 Gary Kessler provides a json file that I parsed to generate those rules.
-Thanks to Gary Kessler: https://www.garykessler.net/library/file_sigs.html
+Thanks to Gary Kessler: https:/ /www.garykessler.net/library/file_sigs.html
 Careful, some of those rules are not usable as is!
 This is still a work in progress.
 *\
