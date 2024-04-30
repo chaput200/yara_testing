@@ -1,17 +1,3 @@
-
-\*
-author: coldren
-created: 20240107
-modified: 20240107
-As part of the 100 Days of YARA 2024 challenge, John Hammond shared the idea to have magic numbers in a single YARA file.
-I thought it was brilliant.
-I based the rule syntax on stvemillertime ct_headers file.
-Gary Kessler provides a json file that I parsed to generate those rules.
-Thanks to Gary Kessler: https:/ /www.garykessler.net/library/file_sigs.html
-Careful, some of those rules are not usable as is!
-This is still a work in progress.
-*\
-
 rule sign_0 { strings: $hex = { 00 00 00 } condition: $hex } \\ High Efficiency Image Container (HEIC)_1: AVIF
 rule sign_1 { strings: $hex = { 00 00 00 20 66 74 79 70 68 65 69 63 } condition: $hex } \\ High Efficiency Image Container (HEIC)_2: HEIC
 rule sign_2 { strings: $hex = { 00 00 00 0C 6A 50 20 20 } condition: $hex } \\ JPEG2000 image files: JP2
