@@ -1,9 +1,6 @@
 rule sign_1 { strings: $hex = { 00 00 00 20 66 74 79 70 68 65 69 63 } condition: $hex } // High Efficiency Image Container (HEIC)_2: HEIC
 
 
-rule sign_2 { strings: $hex = { 00 00 00 0C 6A 50 20 20 } condition: $hex } // JPEG2000 image files: JP2
-
-
 rule sign_3 { strings: $hex = { 00 00 00 14 66 74 79 70 } condition: $hex } // 3GPP multimedia files: 3GP
 
 
@@ -85,9 +82,6 @@ rule sign_35 { condition: uint32be(0) == 0x000DBBA0 } // Mbox table of contents 
 rule sign_36 { condition: uint16be(0) == 0x0011 } // FLIC animation: FLI
 
 
-rule sign_37 { strings: $hex = { 00 14 00 00 01 02 } condition: $hex } // BIOS details in RAM: (none)
-
-
 rule sign_38 { strings: $hex = { 00 1E 84 90 00 00 00 00 } condition: $hex } // Netscape Communicator (v4) mail folder: SNM
 
 
@@ -112,16 +106,7 @@ rule sign_44 { condition: uint32be(0) == 0x010F0000 } // SQL Data Base: MDF
 rule sign_45 { condition: uint16be(0) == 0x0110 } // Novell LANalyzer capture file: TR1
 
 
-rule sign_47 { strings: $hex = { 01 FF 02 04 03 02 } condition: $hex } // Micrografx vector graphic file: DRW
-
-
 rule sign_48 { condition: uint32be(0) == 0x02647373 } // Digital Speech Standard file: DSS
-
-
-rule sign_51 { condition: uint32be(0) == 0x03000000 } // Quicken price history: QPH
-
-
-rule sign_52 { condition: uint32be(0) == 0x03000000 } // Nokia PC Suite Content Copier file: NFC
 
 
 rule sign_53 { strings: $hex = { 03 00 00 00 41 50 50 52 } condition: $hex } // Approach index file: ADX
@@ -130,22 +115,7 @@ rule sign_53 { strings: $hex = { 03 00 00 00 41 50 50 52 } condition: $hex } // 
 rule sign_54 { condition: uint32be(0) == 0x03647373 } // Digital Speech Standard (v3): DSS
 
 
-rule sign_55 { condition: uint8(0) == 0x04 } // dBASE IV file: DB4
-
-
-rule sign_56 { condition: uint32be(0) == 0x04000000 } // INFO2 Windows recycle bin_1: (none)
-
-
-rule sign_57 { condition: uint32be(0) == 0x05000000 } // INFO2 Windows recycle bin_2: (none)
-
-
 rule sign_58 { strings: $hex = { 06 06 ED F5 D8 1D 46 E5 BD 31 EF E7 FE 74 B7 1D } condition: $hex } // Adobe InDesign: INDD
-
-
-rule sign_59 { strings: $hex = { 06 0E 2B 34 02 05 01 01 0D 01 02 01 01 02 } condition: $hex } // Material Exchange Format: MXF
-
-
-rule sign_60 { condition: uint8(0) == 0x07 } // Generic drawing programs: DRW
 
 
 rule sign_61 { condition: uint32be(0) == 0x07534B46 } // SkinCrafter skin: SKF
@@ -179,9 +149,6 @@ rule sign_72 { condition: uint32be(0) == 0x0E574B53 } // DeskMate Worksheet: WKS
 
 
 rule sign_73 { condition: uint32be(512) == 0x0F00E803 } // PowerPoint presentation subheader_2: PPT
-
-
-rule sign_74 { strings: $hex = { 0F 53 49 42 45 4C 49 55 53 } condition: $hex } // Sibelius Music - Score: SIB
 
 
 rule sign_75 { condition: uint32be(0) == 0x10000000 } // Easy CD Creator 5 Layout file: CL5
@@ -241,19 +208,10 @@ rule sign_100 { condition: uint32be(0) == 0x2142444E } // Microsoft Outlook Exch
 rule sign_102 { strings: $hex = { 23 20 44 69 73 6B 20 44 } condition: $hex } // VMware 4 Virtual Disk description: VMDK
 
 
-rule sign_103 { strings: $hex = { 23 20 4D 69 63 72 6F 73 } condition: $hex } // MS Developer Studio project file: DSP
-
-
 rule sign_104 { strings: $hex = { 23 20 54 68 69 73 20 69 73 20 61 6E 20 4B 65 79 } condition: $hex } // Google Earth Keyhole Placemark file: ETA
 
 
-rule sign_105 { strings: $hex = { 23 21 41 4D 52 } condition: $hex } // Adaptive Multi-Rate ACELP Codec (GSM): AMR
-
-
 rule sign_106 { strings: $hex = { 23 21 53 49 4C 4B 0A } condition: $hex } // Skype audio compression: SIL
-
-
-rule sign_107 { strings: $hex = { 23 3F 52 41 44 49 41 4E } condition: $hex } // Radiance High Dynamic Range image file: HDR
 
 
 rule sign_108 { condition: uint32be(0) == 0x23407E5E } // VBScript Encoded script: VBE
@@ -272,9 +230,6 @@ rule sign_112 { strings: $hex = { 24 46 4C 32 40 28 23 29 } condition: $hex } //
 
 
 rule sign_116 { strings: $hex = { 25 62 69 74 6D 61 70 } condition: $hex } // Fuzzy bitmap (FBM) file: FBM
-
-
-rule sign_117 { strings: $hex = { 28 54 68 69 73 20 66 69 } condition: $hex } // BinHex 4 Compressed Archive: HQX
 
 
 rule sign_118 { strings: $hex = { 2A 2A 2A 20 20 49 6E 73 } condition: $hex } // Symantec Wise Installer log: LOG
@@ -325,9 +280,6 @@ rule sign_137 { strings: $hex = { 37 E4 53 96 C9 DB D6 07 } condition: $hex } //
 rule sign_138 { condition: uint32be(0) == 0x38425053 } // Photoshop image: PSD
 
 
-rule sign_139 { strings: $hex = { 3A 56 45 52 53 49 4F 4E } condition: $hex } // Surfplan kite project file: SLE
-
-
 rule sign_146 { strings: $hex = { 3C 3F 78 6D 6C 20 76 65 72 73 69 6F 6E 3D 22 31 2E 30 22 3F 3E 0D 0A 3C 4D 4D 43 5F 43 6F 6E 73 6F 6C 65 46 69 6C 65 20 43 6F 6E 73 6F 6C 65 56 65 72 73 69 6F 6E 3D 22 } condition: $hex } // MMC Snap-in Control file: MSC
 
 
@@ -340,16 +292,10 @@ rule sign_148 { strings: $hex = { 3C 43 73 6F 75 6E 64 53 79 6E 74 68 65 73 69 7
 rule sign_149 { strings: $hex = { 3C 4B 65 79 68 6F 6C 65 3E } condition: $hex } // Google Earth Keyhole Overlay file: ETA
 
 
-rule sign_150 { strings: $hex = { 3C 4D 61 6B 65 72 46 69 } condition: $hex } // Adobe FrameMaker: FM,MIF
-
-
 rule sign_151 { strings: $hex = { 3C 67 70 78 20 76 65 72 73 69 6F 6E 3D 22 31 2E } condition: $hex } // GPS Exchange (v1.1): GPX
 
 
 rule sign_152 { strings: $hex = { 3C 7E 36 3C 5C 25 5F 30 67 53 71 68 3B } condition: $hex } // BASE85 file: B85
-
-
-rule sign_154 { condition: uint32be(0) == 0x3F5F0300 } // Windows Help file_2: GID,HLP
 
 
 rule sign_155 { strings: $hex = { 40 40 40 20 00 00 40 40 40 40 } condition: $hex } // EndNote Library File: ENL
@@ -419,9 +365,6 @@ rule sign_183 { condition: uint32be(0) == 0x43415420 } // EA Interchange Format 
 rule sign_184 { strings: $hex = { 43 42 46 49 4C 45 } condition: $hex } // WordPerfect dictionary: CBD
 
 
-rule sign_185 { strings: $hex = { 43 44 30 30 31 } condition: $hex } // ISO-9660 CD Disc Image: ISO
-
-
 rule sign_186 { strings: $hex = { 43 44 44 41 66 6D 74 20 } condition: $hex } // RIFF CD audio: CDA
 
 
@@ -455,16 +398,10 @@ rule sign_195 { strings: $hex = { 43 52 55 53 48 20 76 } condition: $hex } // Cr
 rule sign_197 { strings: $hex = { 43 61 6C 63 75 6C 75 78 20 49 6E 64 6F 6F 72 20 } condition: $hex } // Calculux Indoor lighting project file: CIN
 
 
-rule sign_199 { strings: $hex = { 43 6C 69 65 6E 74 20 55 } condition: $hex } // IE History file: DAT
-
-
 rule sign_200 { condition: uint32be(0) == 0x43723234 } // Google Chrome Extension: CRX
 
 
 rule sign_201 { condition: uint32be(0) == 0x43724F44 } // Google Chromium patch update: CRX
-
-
-rule sign_202 { strings: $hex = { 43 72 65 61 74 69 76 65 20 56 6F 69 63 65 20 46 } condition: $hex } // Creative Voice: VOC
 
 
 rule sign_203 { strings: $hex = { 44 41 41 00 00 00 00 00 } condition: $hex } // PowerISO Direct-Access-Archive image: DAA
@@ -527,9 +464,6 @@ rule sign_225 { condition: uint32be(0) == 0x464F524D } // IFF ANIM file: ANM
 rule sign_226 { condition: uint32be(0) == 0x464F524D } // EA Interchange Format File (IFF)_1: IFF
 
 
-rule sign_230 { condition: uint32be(0) == 0x46726F6D } // Generic e-mail_2: EML
-
-
 rule sign_232 { condition: uint32be(0) == 0x47504154 } // GIMP pattern file: PAT
 
 
@@ -557,15 +491,6 @@ rule sign_243 { condition: uint32be(0) == 0x49492A00 } // TIFF file_2: TIF,TIFF
 rule sign_244 { strings: $hex = { 49 4D 4D 4D 15 00 00 00 } condition: $hex } // Windows 7 thumbnail_2: DB
 
 
-rule sign_245 { condition: uint32be(0) == 0x49536328 } // Install Shield compressed file: CAB,HDR
-
-
-rule sign_246 { strings: $hex = { 49 54 4F 4C 49 54 4C 53 } condition: $hex } // MS Reader eBook: LIT
-
-
-rule sign_248 { strings: $hex = { 49 6E 6E 6F 20 53 65 74 } condition: $hex } // Inno Setup Uninstall Log: DAT
-
-
 rule sign_249 { strings: $hex = { 49 6E 74 65 72 40 63 74 69 76 65 20 50 61 67 65 } condition: $hex } // Inter@ctive Pager Backup (BlackBerry file: IPD
 
 
@@ -585,9 +510,6 @@ rule sign_255 { condition: uint32be(0) == 0x4B490000 } // Win9x printer spool fi
 
 
 rule sign_256 { strings: $hex = { 4B 57 41 4A 88 F0 27 D1 } condition: $hex } // KWAJ (compressed) file: (none)
-
-
-rule sign_257 { strings: $hex = { 4C 00 00 00 01 14 02 00 } condition: $hex } // Windows shortcut file: LNK
 
 
 rule sign_258 { condition: uint16be(0) == 0x4C01 } // MS COFF relocatable object code: OBJ
@@ -626,9 +548,6 @@ rule sign_269 { strings: $hex = { 4D 43 57 20 54 65 63 68 6E 6F 67 6F 6C 69 65 7
 rule sign_270 { strings: $hex = { 4D 44 4D 50 93 A7 } condition: $hex } // Windows dump file: DMP,HDMP
 
 
-rule sign_271 { strings: $hex = { 4D 49 4C 45 53 } condition: $hex } // Milestones project management file: MLS
-
-
 rule sign_272 { condition: uint32be(0) == 0x4D4C5357 } // Skype localization data file: MLS
 
 
@@ -641,15 +560,6 @@ rule sign_275 { strings: $hex = { 4D 4D 4D 44 00 00 } condition: $hex } // Yamah
 rule sign_276 { condition: uint32be(0) == 0x4D52564E } // VMware BIOS state file: NVRAM
 
 
-rule sign_283 { strings: $hex = { 4D 53 57 49 4D } condition: $hex } // Microsoft Windows Imaging Format: WIM
-
-
-rule sign_285 { condition: uint32be(0) == 0x4D546864 } // MIDI sound file: MID,MIDI
-
-
-rule sign_286 { condition: uint32be(0) == 0x4D546864 } // Yamaha Piano: PCS
-
-
 rule sign_287 { condition: uint16be(0) == 0x4D56 } // CD Stomper Pro label file: DSN
 
 
@@ -657,9 +567,6 @@ rule sign_288 { strings: $hex = { 4D 56 32 31 34 } condition: $hex } // Mileston
 
 
 rule sign_289 { condition: uint32be(0) == 0x4D563243 } // Milestones project management file_2: MLS
-
-
-rule sign_304 { strings: $hex = { 4D 69 63 72 6F 73 6F 66 74 20 43 2F 43 2B 2B 20 } condition: $hex } // MS C++ debugging symbols file: PDB
 
 
 rule sign_306 { strings: $hex = { 4D 69 63 72 6F 73 6F 66 74 20 57 69 6E 64 6F 77 73 20 4D 65 64 69 61 20 50 6C 61 79 65 72 20 2D 2D 20 } condition: $hex } // Windows Media Player playlist: WPL
@@ -710,16 +617,10 @@ rule sign_341 { strings: $hex = { 50 4B 03 04 0A 00 02 00 } condition: $hex } //
 rule sign_342 { strings: $hex = { 50 4B 03 04 14 00 01 00 } condition: $hex } // ZLock Pro encrypted ZIP: ZIP
 
 
-rule sign_343 { strings: $hex = { 50 4B 03 04 14 00 06 00 } condition: $hex } // MS Office 2007 documents: DOCX,PPTX,XLSX
-
-
 rule sign_345 { condition: uint32be(0) == 0x504B0506 } // PKZIP archive_2: ZIP
 
 
 rule sign_346 { condition: uint32be(0) == 0x504B0708 } // PKZIP archive_3: ZIP
-
-
-rule sign_347 { strings: $hex = { 50 4B 4C 49 54 45 } condition: $hex } // PKLITE archive: ZIP
 
 
 rule sign_348 { strings: $hex = { 50 4B 53 70 58 } condition: $hex } // PKSFX self-extracting archive: ZIP
@@ -746,9 +647,6 @@ rule sign_354 { condition: uint32be(0) == 0x50615645 } // Parrot Video Encapsula
 rule sign_355 { condition: uint32be(92) == 0x51454C20 } // Quicken data: QEL
 
 
-rule sign_357 { strings: $hex = { 51 4C 43 4D 66 6D 74 20 } condition: $hex } // RIFF Qualcomm PureVoice: QCP
-
-
 rule sign_358 { strings: $hex = { 51 57 20 56 65 72 2E 20 } condition: $hex } // Quicken data file: ABD,QSD
 
 
@@ -758,9 +656,6 @@ rule sign_360 { strings: $hex = { 52 41 5A 41 54 44 42 31 } condition: $hex } //
 rule sign_361 { strings: $hex = { 52 44 58 32 0A } condition: $hex } // R saved work space: RDATA
 
 
-rule sign_362 { strings: $hex = { 52 45 47 45 44 49 54 } condition: $hex } // WinNT Registry-Registry Undo files: REG,SUD
-
-
 rule sign_363 { strings: $hex = { 52 45 56 4E 55 4D 3A 2C } condition: $hex } // Antenna data file: AD
 
 
@@ -768,12 +663,6 @@ rule sign_371 { strings: $hex = { 52 4D 49 44 64 61 74 61 } condition: $hex } //
 
 
 rule sign_372 { condition: uint32be(0) == 0x52545353 } // WinNT Netmon capture file: CAP
-
-
-rule sign_373 { strings: $hex = { 52 61 72 21 1A 07 00 } condition: $hex } // WinRAR compressed archive: RAR
-
-
-rule sign_374 { strings: $hex = { 52 65 74 75 72 6E 2D 50 } condition: $hex } // Generic e-mail_1: EML
 
 
 rule sign_375 { condition: uint32be(4) == 0x53434341 } // Windows prefetch: PF
@@ -815,9 +704,6 @@ rule sign_387 { strings: $hex = { 53 51 4C 4F 43 4F 4E 56 } condition: $hex } //
 rule sign_388 { strings: $hex = { 53 5A 20 88 F0 27 33 D1 } condition: $hex } // QBASIC SZDD file: (none)
 
 
-rule sign_390 { strings: $hex = { 53 74 75 66 66 49 74 20 } condition: $hex } // StuffIt compressed archive: SIT
-
-
 rule sign_391 { strings: $hex = { 53 75 70 65 72 43 61 6C } condition: $hex } // SuperCalc worksheet: CAL
 
 
@@ -851,9 +737,6 @@ rule sign_404 { condition: uint32be(0) == 0x574D4D50 } // Walkman MP3 file: DAT
 rule sign_405 { strings: $hex = { 57 53 32 30 30 30 } condition: $hex } // WordStar for Windows file: WS2
 
 
-rule sign_406 { strings: $hex = { 57 69 6E 5A 69 70 } condition: $hex } // WinZip compressed archive: ZIP
-
-
 rule sign_407 { strings: $hex = { 57 6F 72 64 50 72 6F } condition: $hex } // Lotus WordPro file: LWP
 
 
@@ -861,9 +744,6 @@ rule sign_408 { condition: uint16be(0) == 0x582D } // Exchange e-mail: EML
 
 
 rule sign_409 { condition: uint32be(0) == 0x58435000 } // Packet sniffer files: CAP
-
-
-rule sign_410 { strings: $hex = { 58 50 43 4F 4D 0A 54 79 } condition: $hex } // XPCOM libraries: XPT
 
 
 rule sign_411 { condition: uint32be(0) == 0x58504453 } // SMPTE DPX file (little endian): DPX
@@ -887,9 +767,6 @@ rule sign_418 { strings: $hex = { 5B 56 45 52 5D } condition: $hex } // Lotus AM
 rule sign_419 { strings: $hex = { 5B 56 4D 44 5D } condition: $hex } // VocalTec VoIP media file: VMD
 
 
-rule sign_420 { strings: $hex = { 5B 57 69 6E 64 6F 77 73 } condition: $hex } // Microsoft Code Page Translation file: CPX
-
-
 rule sign_421 { strings: $hex = { 5B 66 6C 74 73 69 6D 2E } condition: $hex } // Flight Simulator Aircraft Configuration: CFG
 
 
@@ -905,16 +782,10 @@ rule sign_424 { condition: uint32be(0) == 0x5DFCC800 } // Husqvarna Designer: HU
 rule sign_425 { condition: uint32be(0) == 0x5F27A889 } // Jar archive: JAR
 
 
-rule sign_426 { strings: $hex = { 5F 43 41 53 45 5F } condition: $hex } // EnCase case file: CAS,CBK
-
-
 rule sign_427 { condition: uint16be(0) == 0x60EA } // Compressed archive file: ARJ
 
 
 rule sign_429 { strings: $hex = { 62 65 67 69 6E 2D 62 61 73 65 36 34 } condition: $hex } // UUencoded BASE64 file: b64
-
-
-rule sign_430 { strings: $hex = { 62 70 6C 69 73 74 } condition: $hex } // Binary property list (plist): (none)
 
 
 rule sign_431 { condition: uint32be(0) == 0x63616666 } // Apple Core Audio File: CAF
@@ -948,9 +819,6 @@ rule sign_440 { strings: $hex = { 65 6E 63 72 63 64 73 61 } condition: $hex } //
 
 
 rule sign_441 { condition: uint32be(0) == 0x66490000 } // WinNT printer spool file: SHD
-
-
-rule sign_442 { strings: $hex = { 66 4C 61 43 00 00 00 22 } condition: $hex } // Free Lossless Audio Codec file: FLAC
 
 
 rule sign_443 { strings: $hex = { 66 74 79 70 33 67 70 35 } condition: $hex } // MPEG-4 video file_1: MP4
@@ -1019,9 +887,6 @@ rule sign_463 { condition: uint16be(0) == 0x6F3C } // SMS text (SIM): (none)
 rule sign_464 { strings: $hex = { 6F 70 64 61 74 61 30 31 } condition: $hex } // 1Password 4 Cloud Keychain encrypted data: (none)
 
 
-rule sign_465 { condition: uint32be(0) == 0x72656766 } // WinNT registry file: DAT
-
-
 rule sign_466 { condition: uint32be(0) == 0x72696666 } // Sonic Foundry Acid Music File: AC
 
 
@@ -1041,9 +906,6 @@ rule sign_473 { condition: uint32be(0) == 0x737A657A } // PowerBASIC Debugger Sy
 
 
 rule sign_474 { strings: $hex = { 74 42 4D 50 4B 6E 57 72 } condition: $hex } // PathWay Map file: PRC
-
-
-rule sign_476 { strings: $hex = { 75 73 74 61 72 } condition: $hex } // Tape Archive: TAR
 
 
 rule sign_477 { condition: uint32be(0) == 0x762F3101 } // OpenEXR bitmap image: EXR
@@ -1083,9 +945,6 @@ rule sign_490 { strings: $hex = { 7E 45 53 44 77 F6 85 3E BF 6A D2 11 45 61 73 7
 
 
 rule sign_491 { strings: $hex = { 7E 74 2C 01 50 70 02 4D 52 } condition: $hex } // Digital Watchdog DW-TP-500G audio: IMG
-
-
-rule sign_493 { condition: uint8(0) == 0x80 } // Relocatable object code: OBJ
 
 
 rule sign_494 { strings: $hex = { 80 00 00 20 03 12 04 } condition: $hex } // Dreamcast audio: ADX
@@ -1178,13 +1037,7 @@ rule sign_528 { strings: $hex = { CE 24 B9 A2 20 00 00 00 } condition: $hex } //
 rule sign_529 { condition: uint32be(0) == 0xCECECECE } // Java Cryptography Extension keystore: JCEKS
 
 
-rule sign_530 { condition: uint32be(0) == 0xCEFAEDFE } // OS X ABI Mach-O binary (32-bit reverse): (none)
-
-
 rule sign_532 { condition: uint32be(0) == 0xCFAD12FE } // Outlook Express e-mail folder: DBX
-
-
-rule sign_533 { condition: uint32be(0) == 0xCFFAEDFE } // OS X ABI Mach-O binary (64-bit reverse): (none)
 
 
 rule sign_551 { condition: uint32be(0) == 0xD20A0000 } // WinPharoah filter file: FTR
@@ -1217,12 +1070,6 @@ rule sign_560 { strings: $hex = { E4 52 5C 7B 8C D8 A7 4D } condition: $hex } //
 rule sign_561 { condition: uint8(0) == 0xE8 } // Windows executable file_1: COM,SYS
 
 
-rule sign_562 { condition: uint8(0) == 0xE9 } // Windows executable file_2: COM,SYS
-
-
-rule sign_563 { condition: uint8(0) == 0xEB } // Windows executable file_3: COM,SYS
-
-
 rule sign_564 { condition: uint32be(0) == 0xEB3C902A } // GEM Raster file: IMG
 
 
@@ -1230,9 +1077,6 @@ rule sign_565 { strings: $hex = { EB 52 90 2D 46 56 45 2D } condition: $hex } //
 
 
 rule sign_566 { strings: $hex = { EB 58 90 2D 46 56 45 2D } condition: $hex } // BitLocker boot sector (Win7): (none)
-
-
-rule sign_567 { condition: uint32be(512) == 0xECA5C100 } // Word document subheader: DOC
 
 
 rule sign_574 { condition: uint32be(0) == 0xF8FFFFFF } // FAT16 File Allocation Table: (none)
@@ -1245,27 +1089,6 @@ rule sign_576 { strings: $hex = { F8 FF FF 0F FF FF FF FF } condition: $hex } //
 
 
 rule sign_577 { condition: uint32be(0) == 0xF9BEB4D9 } // Bitcoin-Qt blockchain block file: DAT
-
-
-rule sign_585 { strings: $hex = { FD FF FF FF 0E 00 00 00 } condition: $hex } // PowerPoint presentation subheader_4: PPT
-
-
-rule sign_586 { strings: $hex = { FD FF FF FF 10 } condition: $hex } // Excel spreadsheet subheader_2: XLS
-
-
-rule sign_587 { strings: $hex = { FD FF FF FF 1C 00 00 00 } condition: $hex } // PowerPoint presentation subheader_5: PPT
-
-
-rule sign_589 { strings: $hex = { FD FF FF FF 20 } condition: $hex } // Developer Studio subheader: OPT
-
-
-rule sign_591 { strings: $hex = { FD FF FF FF 23 } condition: $hex } // Excel spreadsheet subheader_5: XLS
-
-
-rule sign_592 { strings: $hex = { FD FF FF FF 28 } condition: $hex } // Excel spreadsheet subheader_6: XLS
-
-
-rule sign_593 { strings: $hex = { FD FF FF FF 29 } condition: $hex } // Excel spreadsheet subheader_7: XLS
 
 
 rule sign_594 { strings: $hex = { FD FF FF FF 43 00 00 00 } condition: $hex } // PowerPoint presentation subheader_6: PPT
@@ -1299,11 +1122,5 @@ rule sign_609 { condition: uint16be(0) == 0xFFF9 } // MPEG-2 AAC audio: AAC
 
 
 rule sign_612 { condition: uint32be(0) == 0xFFFE0000 } // UTF-32-UCS-4 file: (none)
-
-
-rule sign_613 { strings: $hex = { FF FE 23 00 6C 00 69 00 } condition: $hex } // MSinfo file: MOF
-
-
-rule sign_614 { condition: uint32be(0) == 0xFFFFFFFF } // DOS system driver: SYS
 
 
